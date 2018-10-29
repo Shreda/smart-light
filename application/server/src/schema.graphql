@@ -6,6 +6,7 @@ type Query {
   post(id: ID!): Post
   me: User
   lights: [Light!]!
+  light(id: ID!): Light
 }
 
 type Mutation {

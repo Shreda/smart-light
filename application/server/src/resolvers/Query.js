@@ -28,8 +28,11 @@ const Query = {
   },
 
   lights(parent, args, ctx, info) {
-
     return ctx.db.query.lights(info)
+  },
+
+  light(parent, {id}, ctx, info){
+    return ctx.db.query.light({where: {id}}, info)
   }
 }
 

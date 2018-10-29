@@ -13,7 +13,17 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
+API_URL = "http://localhost:4000"
+
 LIGHT_ID       = "cjnu4hp0u00190a68ieele3zn"
+
+LIGHT_QUERY = """
+  query light($id: ID!){
+    light(id:$id){
+      color
+    }
+  }
+"""
 
 def query_api(query='', variables={}, url='', headers={}):
     """
@@ -57,6 +67,9 @@ if __name__ == '__main__':
   try:
     while True:
       turnRed(strip)
+      x = query_api(query=LIGHT_QUERY, variables={'id': LIGHT_ID}, url=API_URL)
+      print(x)
+      time.sleep(5)
 
   except KeyboardInterrupt:
     if args.clear:
