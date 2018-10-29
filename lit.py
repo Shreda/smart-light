@@ -15,7 +15,7 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-API_URL = "http://localhost:4000"
+API_URL = "http://127.0.0.1:4000/"
 
 LIGHT_ID       = "cjnu4hp0u00190a68ieele3zn"
 
