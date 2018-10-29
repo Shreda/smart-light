@@ -80,6 +80,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 def turnRed(strip):
   strip.setPixelColor(1, Color(255,0,0))
+  strip.show()
 
 # Main program logic follows:
 if __name__ == '__main__':
