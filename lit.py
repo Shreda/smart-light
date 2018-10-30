@@ -71,7 +71,7 @@ if __name__ == '__main__':
     while True:
       turnRed(strip)
       data = query_api(query=LIGHT_QUERY, variables={'id': LIGHT_ID}, url=API_URL)
-      color = data['data']['light']
+      color = data['data']['light']['color']
       print(color)
       time.sleep(5)
 
