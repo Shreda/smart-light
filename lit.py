@@ -49,7 +49,7 @@ def colorWipe(strip, color, wait_ms=50):
 
 def turnRed(strip, color):
   print(type(0xffff00))
-  print(type(hex(color)))
+  print(type(int(hex(color)))
   print(0xffff00 == hex(color))
   strip.setPixelColor(1, hex(color))
   strip.show()
