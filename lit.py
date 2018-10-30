@@ -70,7 +70,6 @@ if __name__ == '__main__':
   try:
     while True:
       turnRed(strip)
-      print(data)
       data = query_api(query=LIGHT_QUERY, variables={'id': LIGHT_ID}, url=API_URL)
       color = data['data']['light']['color']
       hex_color = int(color, 16)
