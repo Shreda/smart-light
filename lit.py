@@ -48,7 +48,7 @@ def colorWipe(strip, color, wait_ms=50):
     time.sleep(wait_ms/1000.0)
 
 def turnRed(strip):
-  strip.setPixelColor(1, 0xFF0000)
+  strip.setPixelColor(1, 0xFF00)
   strip.show()
 
 # Main program logic follows:
