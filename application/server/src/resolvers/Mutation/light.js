@@ -12,6 +12,21 @@ const light = {
     )
   },
 
+  async updateLight(parent, {id, color}, ctx, info) {
+    const lightExists = await ctx.db.exists.Light({
+      id,
+    })
+
+    if (!lightExists) {
+      throw new Error(`Light not found`)
+    }
+
+    return ctx.db.mutation.updateLight({
+      where: {id},
+      data: {color}
+    })
+  }
+
 }
 
 module.exports = {light}
