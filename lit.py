@@ -74,7 +74,7 @@ if __name__ == '__main__':
       data = query_api(query=LIGHT_QUERY, variables={'id': LIGHT_ID}, url=API_URL)
       color = data['data']['light']['color']
       hex_color = int(color, 16)
-      print(hex(hex_color)
+      print(hex(hex_color))
       time.sleep(5)
 
   except KeyboardInterrupt:
