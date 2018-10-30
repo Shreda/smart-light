@@ -34,6 +34,7 @@ class ColorList extends Component {
 
     return(
       <Row>
+        <h4>Traffic Lights:</h4>
         {this.props.lightsQuery &&
           this.props.lightsQuery.lights.map(light => 
             <ColorPick
