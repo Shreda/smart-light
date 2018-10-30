@@ -49,7 +49,7 @@ def colorWipe(strip, color, wait_ms=50):
 
 def turnRed(strip, color):
   print(color)
-  strip.setPixelColor(1, 0xffff00)
+  strip.setPixelColor(1, hex(color))
   strip.show()
 
 # Main program logic follows:
@@ -72,8 +72,8 @@ if __name__ == '__main__':
     while True:
       data = query_api(query=LIGHT_QUERY, variables={'id': LIGHT_ID}, url=API_URL)
       color = data['data']['light']['color']
-      hex_color = hex(int(color, 16))
-      turnRed(strip, hex_color)
+      test_color = int(color, 16)
+      turnRed(strip, test_color)
       time.sleep(5)
 
   except KeyboardInterrupt:
