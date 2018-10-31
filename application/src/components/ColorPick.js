@@ -14,7 +14,7 @@ class ColorPick extends Component {
   render() {
     return (
       <Col m={6} s={12} className={'center-align'}>
-        <Card title={this.props.data.id}>
+        <Card title={this.props.data.id.slice(0,10)}>
           <div>
             <Button floating large className='red' waves='light' onClick={(e) => this.props.updateLight(e, '0x00ff00')}/>
           </div>
