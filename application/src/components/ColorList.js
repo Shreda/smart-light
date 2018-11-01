@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ColorPick from './ColorPick'
 import { graphql, compose } from 'react-apollo'
 import { gql } from 'apollo-boost'
-import {Row} from 'react-materialize';
+import {Row, Button} from 'react-materialize';
 
 class ColorList extends Component {
   constructor(props){
@@ -10,17 +10,33 @@ class ColorList extends Component {
     this.state = {
 
     }
+    this.createLight = this.createLight.bind(this)
   }
 
-  updateLight(e, id, color) {
+  async updateLight(e, id, color) {
     e.preventDefault()
     console.log(color)
-    this.props.updateLight({
+    await this.props.updateLight({
       variables: {
         id,
         color: color
       }
     })
+  }
+
+  async createLight(e){
+    e.preventDefault()
+    await this.props.createLight({
+      variables: {
+        color: "0xff0000"
+      },
+      update: (store, {data: {createLight}}) => {
+        const data = store.readQuery({query: LIGHTS_QUERY})
+        data.lights.unshift(createLight)
+        store.writeQuery({query: LIGHTS_QUERY, data})
+      }
+    })
+    this.props.history.replace('/')
   }
 
   render(){
@@ -41,9 +57,13 @@ class ColorList extends Component {
               key={light.id}
               data = {light}
               updateLight = {(e, color) => this.updateLight(e, light.id, color)}
+              refresh={() => this.props.lightsQuery.refetch()}
             />
           )
         }
+        <Button floating fab='vertical' icon='add' className='red' large style={{bottom: '45px', right: '24px'}}>
+          <Button floating icon='insert_chart' className='red' onClick={(e) => this.createLight(e)}/>
+        </Button>        
       </Row>
     )
   }
@@ -58,10 +78,18 @@ const LIGHTS_QUERY = gql`
   }
 `
 
-
 const UPDATE_LIGHT_MUTATION = gql`
   mutation UpdateLightMutation($id:ID!, $color: String!){
     updateLight(id:$id, color:$color){
+      id
+      color
+    }
+  }
+`
+
+const CREATE_LIGHT_MUTATION = gql`
+  mutation CreateLightMutation($color: String!){
+    createLight(color:$color){
       id
       color
     }
@@ -74,5 +102,8 @@ export default compose(
   }),
   graphql(UPDATE_LIGHT_MUTATION, {
     name:'updateLight'
-  })
+  }),
+  graphql(CREATE_LIGHT_MUTATION, {
+    name:'createLight'
+  }),
 )(ColorList)
